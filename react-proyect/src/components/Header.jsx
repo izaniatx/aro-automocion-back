@@ -1,5 +1,7 @@
 import logo from "../assets/logo.png";
+import CustomButton from "./CustomButton";
 import "./Header.css";
+import {Link} from 'react-router-dom';
 
 export default function Header() {
   return (
@@ -33,18 +35,28 @@ export default function Header() {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <a className="nav-link" href="/">Inicio</a>
+              <Link className="nav-link" to="/inicio">Inicio</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/servicios">Servicios</a>
+              <Link className="nav-link" to="/servicios">Servicios</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/contacto">Contacto</a>
+              <Link className="nav-link" to="/vende-tu-coche">Vende Tu Coche</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="/DondeEncontrarnos">Donde Encontrarnos</a>
+              <Link className="nav-link" to="/contacto">Contacto</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/DondeEncontrarnos">Donde Encontrarnos</Link>
             </li>
           </ul>
+
+          <CustomButton className="ms-3" onClick={() => alert("¡Log In!")}>
+            Log In
+          </CustomButton>
+          <CustomButton className="ms-2" onClick={() => alert("¡Sign Up!")}>
+            Sign Up
+          </CustomButton>
         </div>
 
       </div>
