@@ -1,8 +1,10 @@
+import MainLayout from "../layouts/MainLayout";
+
 function inicio() { 
     return (
         <div>
-            <h1>Página de Inicio</h1>
-            <p>Bienvenido a la página de inicio de nuestro proyecto React.</p>
+            <MainLayout > 
+            </MainLayout>
         </div>
     );
 }

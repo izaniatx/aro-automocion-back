@@ -54,9 +54,6 @@ export default function Header() {
           <CustomButton className="ms-3" onClick={() => alert("¡Log In!")}>
             Log In
           </CustomButton>
-          <CustomButton className="ms-2" onClick={() => alert("¡Sign Up!")}>
-            Sign Up
-          </CustomButton>
         </div>
 
       </div>
