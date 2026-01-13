@@ -8,7 +8,6 @@ const LoginModal = () => {
   const handleRegisterClick = (e) => {
   e.preventDefault();
 
-  // Cerrar modal de Bootstrap
   const modalEl = document.getElementById("loginModal");
   if (modalEl) {
     const bs = window.bootstrap;
@@ -18,7 +17,6 @@ const LoginModal = () => {
     }
   }
 
-  // Redirigir usando Inertia
  window.location.href = '/registro';
 };
 
@@ -38,6 +36,29 @@ const LoginModal = () => {
   
 };
 
+const submit = (e) => {
+    e.preventDefault();
+
+    router.post('/login', values, {
+        onBefore: () => {
+            console.log("Enviando credenciales...");
+        },
+        onSuccess: () => {
+           
+            const modalEl = document.getElementById("loginModal");
+            const instance = window.bootstrap?.Modal.getInstance(modalEl);
+            instance?.hide();
+            console.log("¡Login exitoso!");
+        },
+        onError: (errors) => {
+         
+            setErrors(errors);
+            console.error("Error en el login:", errors);
+        },
+     
+        preserveScroll: true, 
+    });
+};
 
   return (
     <div

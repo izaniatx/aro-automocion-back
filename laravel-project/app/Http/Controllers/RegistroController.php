@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // o el modelo que uses para usuarios
+use App\Models\User;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered; // IMPORTANTE: Para disparar el evento de email
+use Illuminate\Support\Facades\Auth;
 
 class RegistroController extends Controller
 {
@@ -30,6 +33,15 @@ class RegistroController extends Controller
             'rol_id' => 1,
             
         ]);
+
+                // ESTO ES LO QUE ENVÍA EL CORREO
+        event(new Registered($user));
+
+        // Autologin para que pueda ver la pantalla de "Verifica tu email"
+        auth()->login($user);
+
+        // Redirigir a la ruta que le pide verificar el email
+        return redirect()->route('verification.notice');
     
         return Inertia::location(route('inicio'));
     }
