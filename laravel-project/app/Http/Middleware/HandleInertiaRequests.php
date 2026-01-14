@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\Gate;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -35,17 +36,17 @@ class HandleInertiaRequests extends Middleware
      * @return array<string, mixed>
      */
     public function share(Request $request): array
-    {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
-
-        return [
-            ...parent::share($request),
-            'name' => config('app.name'),
-            'quote' => ['message' => trim($message), 'author' => trim($author)],
-            'auth' => [
-                'user' => $request->user(),
-            ],
-            'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
-        ];
-    }
+{
+    return array_merge(parent::share($request), [
+        'auth' => [
+            'user' => $request->user() ? [
+                'id' => $request->user()->id,
+                'usuario' => $request->user()->usuario,
+                // Usamos el Gate aquí
+                'can_access_admin' => Gate::allows('admin-access'), 
+                'is_client' => Gate::allows('client-access'),
+                ] : null,
+        ],
+    ]);
+}
 }

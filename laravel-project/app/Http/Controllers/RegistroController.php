@@ -30,17 +30,17 @@ class RegistroController extends Controller
             'telefono' => $request->telefono,
             'email' => $request->email,
             'password' => bcrypt($request->contrasenya),
-            'rol_id' => 1,
+            'rol_id' => 2,
             
         ]);
 
-                // ESTO ES LO QUE ENVÍA EL CORREO
+               
         event(new Registered($user));
 
-        // Autologin para que pueda ver la pantalla de "Verifica tu email"
+      
         auth()->login($user);
 
-        // Redirigir a la ruta que le pide verificar el email
+       
         return redirect()->route('verification.notice');
     
         return Inertia::location(route('inicio'));

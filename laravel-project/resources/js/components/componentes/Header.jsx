@@ -30,12 +30,33 @@ export default function Header() {
         {/* NAV ENLACES */}
 
         <ul className="navbar-nav ms-auto">
-            <li className="nav-item "><Link className="nav-link btn-pers" href="/inicio">Inicio</Link></li>
-            <li className="nav-item "><Link className="nav-link btn-pers" href="/catalogo">Catálogo</Link></li>
-            <li className="nav-item "><Link className="nav-link btn-pers" href="/vendeTuCoche">Vende Tu Coche</Link></li>
-            <li className="nav-item "><Link className="nav-link btn-pers" href="/contacto">Contacto</Link></li>
-            <li className="nav-item "><Link className="nav-link btn-pers" href="/donde-encontrarnos">Dónde Encontrarnos</Link></li>
-        </ul>
+          <li className="nav-item"><Link className="nav-link btn-pers" href="/inicio">Inicio</Link></li>
+          <li className="nav-item"><Link className="nav-link btn-pers" href="/catalogo">Catálogo</Link></li>
+          
+          {/* OPCIONES PARA CLIENTE: Usamos un Fragment <></> para envolver los <li> */}
+          {auth?.user?.is_client && (
+              <>
+                  <li className="nav-item">
+                      <Link className="nav-link btn-pers" href="/vendeTuCoche">Vende Tu Coche</Link>
+                  </li>
+                  <li className="nav-item">
+                      <Link className="nav-link btn-pers" href="/contacto">Contacto</Link>
+                  </li>
+                  <li className="nav-item">
+                      <Link className="nav-link btn-pers" href="/donde-encontrarnos">Dónde Encontrarnos</Link>
+                  </li>
+              </>
+          )}
+
+          {/* OPCIÓN PARA ADMINISTRADOR */}
+          {auth?.user?.can_access_admin && (
+              <li className="nav-item">
+                  <Link className="nav-link btn-pers" href="/admin/dashboard">
+                      Panel Admin
+                  </Link>
+              </li>
+          )}
+      </ul>
         
         
         {/* LÓGICA DE SESIÓN */}
