@@ -5,6 +5,7 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use App\Http\Controllers\RegistroController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\LoginController;
 
 /*Route::get('/', function () {
     return Inertia::render('welcome', [
@@ -23,15 +24,15 @@ Route::get('/registro', function () {
 Route::post('/registro', [RegistroController::class, 'registrar']);
 Route::get('/inicio', [RegistroController::class, 'inicio'])->name('inicio');
 
-// Página informativa (Donde el usuario cae tras registrarse)
+
 Route::get('/email/verify', function () {
     return inertia('Auth/VerifyEmail'); 
 })->middleware('auth')->name('verification.notice');
 
-// La ruta que procesa el clic en el email
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
-    return redirect('/inicio'); // A donde va tras verificar
+    return redirect('/inicio');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 
@@ -42,5 +43,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
 });
+
+
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 require __DIR__.'/settings.php';

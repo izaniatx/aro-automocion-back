@@ -11,6 +11,8 @@ const VerifyEmail = () => {
         router.post('/email/verification-notification');
     };
 
+    
+
     return (
         <div className="container mt-5 text-center">
             <Head title="Verificar Email" />
@@ -28,6 +30,15 @@ const VerifyEmail = () => {
                             Reenviar correo de verificación
                         </button>
                     </form>
+
+                    <a 
+                        href="http://localhost:8025" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="btn btn-outline-info"
+                    >
+                        Abrir bandeja de entrada (Mailpit)
+                    </a>
 
                     <button onClick={handleLogout} className="btn btn-link text-secondary">
                         Cerrar sesión

@@ -1,129 +1,112 @@
 import React from "react";
 import "../../../css/LoginModal.css";
-import { Inertia } from '@inertiajs/inertia'; // ✅ así funciona
-
-
+import { useForm, router } from '@inertiajs/react';
 
 const LoginModal = () => {
-  const handleRegisterClick = (e) => {
-  e.preventDefault();
+  const { data, setData, post, processing, errors, reset } = useForm({
+    usuario: '',  
+    password: '',
+  });
 
-  const modalEl = document.getElementById("loginModal");
-  if (modalEl) {
-    const bs = window.bootstrap;
-    const instance = bs?.Modal.getInstance(modalEl) || (bs?.Modal ? new bs.Modal(modalEl) : null);
-    if (instance && typeof instance.hide === "function") {
-      instance.hide();
+  React.useEffect(() => {
+    return () => {
+      console.log("Limpiando modal al navegar...");
+   
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+      document.body.style.paddingRight = '';
+
+      
+      const backdrops = document.getElementsByClassName('modal-backdrop');
+      while (backdrops.length > 0) {
+        backdrops[0].remove();
+      }
+    };
+  }, []);
+  const cerrarModal = () => {
+    const modalEl = document.getElementById("loginModal");
+ 
+    const bootstrap = window.bootstrap;
+    if (modalEl && bootstrap) {
+      const instance = bootstrap.Modal.getInstance(modalEl);
+      instance?.hide();
+      
+      
+      document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+      document.body.classList.remove('modal-open');
     }
-  }
+  };
 
- window.location.href = '/registro';
-};
-
-
-  const handleRecoveryClick = (e) => {
-  e.preventDefault();
-
-  const modalEl = document.getElementById("loginModal");
-  if (modalEl) {
-    const bs = window.bootstrap;
-    const instance = bs?.Modal.getInstance(modalEl) || (bs?.Modal ? new bs.Modal(modalEl) : null);
-    if (instance && typeof instance.hide === "function") {
-      instance.hide();
-    }
-  }
-  window.location.href = '/recoveryPassword';
-  
-};
-
-const submit = (e) => {
+  const manejarNavegacion = (e, url) => {
     e.preventDefault();
+    cerrarModal();
+    router.visit(url); 
+  };
 
-    router.post('/login', values, {
-        onBefore: () => {
-            console.log("Enviando credenciales...");
-        },
-        onSuccess: () => {
-           
-            const modalEl = document.getElementById("loginModal");
-            const instance = window.bootstrap?.Modal.getInstance(modalEl);
-            instance?.hide();
-            console.log("¡Login exitoso!");
-        },
-        onError: (errors) => {
-         
-            setErrors(errors);
-            console.error("Error en el login:", errors);
-        },
-     
-        preserveScroll: true, 
+  const submit = (e) => {
+    e.preventDefault();
+    
+    post('/login', {
+
+      onBefore: () => {
+        
+      },
+      onSuccess: () => {
+        cerrarModal();
+      },
+      onFinish: () => {
+      },
+      onError: () => reset('password'),
     });
-};
+  };
 
   return (
-    <div
-      className="modal fade"
-      id="loginModal"
-      tabIndex="-1"
-      aria-hidden="true"
-    >
+    <div className="modal fade" id="loginModal" tabIndex="-1" aria-hidden="true">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="card shadow-lg w-100 m-0">
             <div className="card-body">
               <div className="text-center">
                 <h1 className="card-title h3">Iniciar Sesión</h1>
-                <p className="card-text text-muted">
-                  Inicia sesión para acceder a tu cuenta
-                </p>
               </div>
 
               <div className="mt-4">
-                <form>
+
+                <form onSubmit={submit}>
                   <div className="mb-4">
-                    <label htmlFor="email" className="form-label text-muted">
-                      Usuario
-                    </label>
+                    <label className="form-label text-muted">Usuario</label>
                     <input
-                      type="email"
-                      className="form-control"
-                      id="email"
-                      placeholder="Usuario"
+                      type="text"
+                      className={`form-control ${errors.usuario ? 'is-invalid' : ''}`}
+                      value={data.usuario}
+                      onChange={(e) => setData('usuario', e.target.value)}
                       required
                     />
+                    {errors.usuario && <div className="invalid-feedback">{errors.usuario}</div>}
                   </div>
 
                   <div className="mb-4">
-                    <label htmlFor="password" className="form-label text-muted">
-                      Contraseña
-                    </label>
+                    <label className="form-label text-muted">Contraseña</label>
                     <input
                       type="password"
-                      className="form-control"
-                      id="password"
-                      placeholder="Contraseña"
+                      className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                      value={data.password}
+                      onChange={(e) => setData('password', e.target.value)}
                       required
                     />
                   </div>
-                  <p className="text-center text-muted mt-4">
-                    ¿Has olvidado tu contraseña?{" "}
-                    
-                    <a href="/RETO/#/recoveryPassword" className="text-decoration-none" onClick={handleRecoveryClick}>
-                      Recuperala
-                    </a>.
-                  </p>
 
                   <div className="d-grid">
-                    <button type="submit" id="boton-inicio-sesion" className="btn btn-dark btn-lg">
-                      Iniciar Sesion 
+                    <button type="submit" className="btn btn-dark btn-lg" disabled={processing}>
+                      {processing ? 'Cargando...' : 'Iniciar Sesion'}
                     </button>
                   </div>
+
                   <p className="text-center text-muted mt-4">
                     ¿No tienes una cuenta?{" "}
-                    
-                    <a href="/RETO/#/registro" className="text-decoration-none" onClick={handleRegisterClick}>
+                    <a href="#" className="text-decoration-none" onClick={(e) => manejarNavegacion(e, '/registro')}>
                       Registrarse
-                    </a>.
+                    </a>
                   </p>
                 </form>
               </div>
