@@ -15,8 +15,16 @@ function MainLayout({ children }: MainLayoutProps) {
 
     const { url } = usePage();
 
+    var aux = "";
+
+    if (url === "/admin/dashboard" || url === "/admin/usuarios") {
+        aux = "#212529";
+    } else  if (url === "/catalogo") {
+        aux = "#f8f9fa";
+    }
+
     return (
-        <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: url === "/admin/dashboard" || url === "/admin/usuarios" ? "#212529" : "transparent" }}>
+        <div className="d-flex flex-column min-vh-100" style={{ backgroundColor: aux }}>
             
             <Header />
             <main className="container flex-grow-1" style={{ padding: "0px", width: "100vw", maxWidth: "100vw" }}>

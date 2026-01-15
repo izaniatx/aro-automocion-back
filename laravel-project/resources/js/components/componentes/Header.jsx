@@ -10,11 +10,11 @@ export default function Header() {
   
   const { props, url } = usePage();
 
- 
   const auth = props.auth;
 
+  
   return (
-    <nav id="header-container" className="custom-header navbar navbar-expand-lg shadow-sm p-3" style={{ backgroundColor: url === "/admin/dashboard" ? "#212529" : "transparent" }} >
+    <nav id="header-container" className="custom-header navbar navbar-expand-lg shadow-sm p-3" >
       <div className="container" >
 
         {/* LOGO */}
@@ -36,7 +36,7 @@ export default function Header() {
               <Link className="nav-link btn-pers" href="/contacto">Contacto</Link>
           </li>
           <li className="nav-item">
-              <Link className="nav-link btn-pers" href="/donde-encontrarnos">Dónde Encontrarnos</Link>
+              <Link className="nav-link btn-pers" href="/dondeEncontrarnos">Dónde Encontrarnos</Link>
           </li>
           
           {/* OPCIONES PARA CLIENTE: Usamos un Fragment <></> para envolver los <li> */}

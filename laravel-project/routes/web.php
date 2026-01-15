@@ -41,6 +41,14 @@ Route::get('/recoveryPassword', function () {
     return Inertia::render('recoveryPassword');
 });
 
+Route::get('/contacto', function () {
+    return Inertia::render('contacto');
+});
+
+Route::get('/dondeEncontrarnos', function () {
+    return Inertia::render('dondeEncontrarnos');
+});
+
 Route::get('/vendeTuCoche', function () {
     return Inertia::render('vendeTuCoche');
 });

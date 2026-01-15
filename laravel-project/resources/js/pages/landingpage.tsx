@@ -40,7 +40,7 @@ function landingpage() {
               </div>
             </div>
 
-            <h1>OFERTAS</h1>
+            <h1 style={{marginLeft: "24%"}}>OFERTAS</h1>
 
             <div className="d-flex flex-column flex-lg-row justify-content-around align-items-center gap-4"
               style={{ minHeight: "50vh" }}>

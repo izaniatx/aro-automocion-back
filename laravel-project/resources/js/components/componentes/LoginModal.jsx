@@ -98,20 +98,20 @@ const LoginModal = () => {
 
                   <p className="text-center text-muted mt-4">
                     ¿Has olvidado tu contraseña?{" "}
-                    <a href="/recoveryPassword" className="text-decoration-none" onClick={(e) => manejarNavegacion(e, '/recoveryPassword')}>
+                    <a href="/recoveryPassword" className="text-decoration-none" onClick={(e) => manejarNavegacion(e, '/recoveryPassword')} style={{color: "#bd3a3f"}}>
                       Recuperala
                     </a>
                   </p>
 
                   <div className="d-grid">
-                    <button type="submit" className="btn btn-dark btn-lg" disabled={processing}>
+                    <button type="submit" className="btn btn-dark btn-lg bt-lm" disabled={processing} style={{backgroundColor: "#bd3a3f", borderColor: "#bd3a3f"}}>
                       {processing ? 'Cargando...' : 'Iniciar Sesion'}
                     </button>
                   </div>
 
                   <p className="text-center text-muted mt-4">
                     ¿No tienes una cuenta?{" "}
-                    <a href="#" className="text-decoration-none" onClick={(e) => manejarNavegacion(e, '/registro')}>
+                    <a href="#" className="text-decoration-none" onClick={(e) => manejarNavegacion(e, '/registro')} style={{color: "#bd3a3f"}}>
                       Registrarse
                     </a>
                   </p>
