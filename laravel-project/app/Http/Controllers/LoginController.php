@@ -15,8 +15,13 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'usuario'  => ['required', 'string'],
-            'password' => ['required', 'string'],
+        
+        'usuario'  => ['required', 'string'],
+        'password' => ['required', 'string'],
+        ], [
+           
+            'usuario.required'  => 'El nombre de usuario es obligatorio.',
+            'password.required' => 'La contraseña es obligatoria.',
         ]);
 
         if (Auth::attempt(['usuario' => $credentials['usuario'], 'password' => $credentials['password']])) {
