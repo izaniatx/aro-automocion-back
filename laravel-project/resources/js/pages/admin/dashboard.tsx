@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import MainLayout from "../../layouts/MainLayout"; 
 import { Link } from '@inertiajs/react';
 import '../../../css/dashboard.css';    
+import SalesChart from '@/components/componentes/SalesChart';
 
 const Dashboard = () => {
     const [cars, setCars] = useState([
@@ -41,6 +42,8 @@ const Dashboard = () => {
                                 + Añadir Vehículo
                             </button>
                         </header>
+
+
 
                         {/* STATS QUICK VIEW */}
                         <div className="row g-3 mb-4">
@@ -105,6 +108,11 @@ const Dashboard = () => {
                                 </table>
                             </div>
                         </section>
+
+
+                        <div className="max-w-3xl mx-auto mt-10">
+                            <SalesChart />
+                        </div>
                     </div>
                 </main>
             </div>

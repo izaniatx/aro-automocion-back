@@ -92,10 +92,3 @@ export default function SalesChart() {
 }
 
 
-
-import SalesChart from '@/Components/SalesChart';
-
-// ... dentro de tu return
-<div className="max-w-3xl mx-auto mt-10">
-    <SalesChart />
-</div>
