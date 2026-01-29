@@ -40,6 +40,60 @@
     border-color: #bd3a3f;
 }
 
+/* Estilos Base del Botón */
+.btn-registrarse {
+    position: relative;          /* Necesario para contener la animación */
+    color: #bd3a3f !important;   /* Agregado el # que faltaba */
+    width: 150px !important; 
+    background-color: #ffffff !important;
+    border: 1px solid #bd3a3f !important; /* Asegura que haya borde visible */
+    overflow: hidden;            /* Mantiene el color dentro del botón */
+    z-index: 1;                  /* Pone el texto por encima del fondo animado */
+    transition: color 0.4s ease-in-out; /* Suaviza el cambio de color del texto */
+}
+
+/* La capa roja oculta (Pseudoelemento) */
+.btn-registrarse::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #bd3a3f;   /* Tu color rojo */
+    z-index: -1;                 /* Detrás del texto */
+    transform: scaleX(0);        /* Ancho inicial 0 */
+    transform-origin: left;      /* Crece desde la izquierda */
+    transition: transform 0.4s ease-in-out; /* Velocidad de la animación */
+}
+
+/* Estado Hover */
+.btn-registrarse:hover {
+    color: #ffffff !important;   /* IMPORTANTE: Texto blanco para que se lea sobre rojo */
+    border-color: #bd3a3f !important; 
+    /* width: 150px; -> No es necesario repetirlo si ya está en la base */
+}
+
+/* Activación de la animación al hacer Hover */
+.btn-registrarse:hover::before {
+    transform: scaleX(1);        /* Escala al 100% */
+}
+
+.btn-registrarse {
+    position: relative;
+    color: bd3a3f !important;
+    width: 150px !important; 
+    background-color: #ffffff !important;
+    border-color: #bd3a3f !important;
+}
+
+.btn-registrarse:hover {
+    color: bd3a3f !important;
+    width: 150px !important; 
+    border-color: #bd3a3f !important; 
+    background-position: left bottom;
+}
+
 .btn-login:hover {
     background-color: rgb(255, 255, 255);
     color: #bd3a3f !important;

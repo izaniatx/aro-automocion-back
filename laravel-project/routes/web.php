@@ -37,6 +37,10 @@ Route::get('/admin/usuarios', function () {
     return Inertia::render('admin/usuarios');
 });
 
+Route::get('/UserProfile', function () {
+    return Inertia::render('UserProfile');
+});
+
 Route::get('/recoveryPassword', function () {
     return Inertia::render('recoveryPassword');
 });
