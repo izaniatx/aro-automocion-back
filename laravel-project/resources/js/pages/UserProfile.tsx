@@ -38,7 +38,11 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, onEdit, onLogout, onDel
       <div 
         className="profile-banner-full" 
         style={{ backgroundColor: bannerColor }}
-      ></div>
+      >
+        <button className="btn-back" onClick={() => window.history.back()}>
+          -
+        </button>
+      </div>
 
       <div className="profile-container">
         

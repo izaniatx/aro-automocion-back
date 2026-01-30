@@ -64,8 +64,7 @@ export default function Header() {
         {auth && auth.user ? (
           <div>
             <Link 
-            href="/logout" 
-            method="post" 
+            href="/UserProfile" 
             as="button" 
             className="btn btn-outline-danger ms-3"
           >

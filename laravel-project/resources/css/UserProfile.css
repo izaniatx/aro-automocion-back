@@ -200,3 +200,27 @@
 .btn-edit:hover::before {
   transform: scaleX(1);
 }
+
+.btn-back {
+  position: absolute;
+  top: 20px; /* Justo debajo del banner */
+  left: 20px;
+  background: white;
+  border: none;
+  border-radius: 40%;
+  width: 66px;
+  height: 56px;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-back:hover {
+  background-color: #f3f4f6;
+  position: relative;
+  top: 18px;
+  border-color: #bd3a3f;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
