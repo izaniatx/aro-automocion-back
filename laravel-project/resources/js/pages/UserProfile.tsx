@@ -40,7 +40,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user, onEdit, onLogout, onDel
         style={{ backgroundColor: bannerColor }}
       >
         <button className="btn-back" onClick={() => window.history.back()}>
-          -
+          ⬅
         </button>
       </div>
 
